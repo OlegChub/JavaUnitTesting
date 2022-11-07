@@ -1,0 +1,6 @@
+com\epam\tamentoring\bo\Product.class
+com\epam\tamentoring\bo\UserAccount.class
+com\epam\tamentoring\bo\ShoppingCart.class
+com\epam\tamentoring\bo\OrderService.class
+com\epam\tamentoring\bo\DiscountUtility.class
+com\epam\tamentoring\exceptions\ProductNotFoundException.class
