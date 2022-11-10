@@ -9,7 +9,6 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ShoppingCartTest {
-
     private static final int PRODUCT1_ID = 1;
     private static final String PRODUCT1_NAME = "Product #1";
     private static final double PRODUCT1_PRICE = 100;
@@ -26,13 +25,10 @@ class ShoppingCartTest {
     private static final double PRODUCT1_SUM_IN_CART = PRODUCT1_PRICE * PRODUCT1_QUANTITY;
     private static final double PRODUCT2_SUM_IN_CART = PRODUCT2_PRICE * PRODUCT2_QUANTITY;
 
-
     @Test
     void addProductWithoutParamsToCart() {
-
         var product = new Product();
         List<Product> productsList = new ArrayList<>();
-
         var shoppingCart = new ShoppingCart(productsList);
         shoppingCart.addProductToCart(product);
 
@@ -45,13 +41,11 @@ class ShoppingCartTest {
 
     @Test
     void addProductWithAllParametersToCart() {
-
         List<Product> productsList = new ArrayList<>();
-
         var shoppingCart = new ShoppingCart(productsList);
         shoppingCart.addProductToCart(PRODUCT1);
 
-        assertEquals(1, productsList.size());
+        assertEquals(1, shoppingCart.getProducts().size());
         assertEquals(PRODUCT1_ID, productsList.get(0).getId());
         assertEquals(PRODUCT1_NAME, productsList.get(0).getName());
         assertEquals(PRODUCT1_PRICE, productsList.get(0).getPrice());
@@ -59,34 +53,41 @@ class ShoppingCartTest {
     }
 
     @Test
-    void removeOneExistingProductFromCart() {
-
+    void addProductWithAllParametersToCartTwice() {
         List<Product> productsList = new ArrayList<>();
-
         var shoppingCart = new ShoppingCart(productsList);
         shoppingCart.addProductToCart(PRODUCT1);
+        shoppingCart.addProductToCart(PRODUCT1);
 
+        assertEquals(1, shoppingCart.getProducts().size());
+        assertEquals(PRODUCT1_ID, productsList.get(0).getId());
+        assertEquals(PRODUCT1_NAME, productsList.get(0).getName());
+        assertEquals(PRODUCT1_PRICE, productsList.get(0).getPrice());
+        assertEquals(PRODUCT1_QUANTITY+PRODUCT1_QUANTITY, productsList.get(0).getQuantity());
+    }
+
+    @Test
+    void removeOneExistingProductFromCart() {
+        List<Product> productsList = new ArrayList<>();
+        var shoppingCart = new ShoppingCart(productsList);
+        shoppingCart.addProductToCart(PRODUCT1);
         shoppingCart.removeProductFromCart(PRODUCT1);
 
-        assertEquals(0, productsList.size());
+        assertEquals(0, shoppingCart.getProducts().size());
     }
 
     @Test
     void removeOneExistingProductInQuantityTwoFromCart() {
-
         List<Product> productsList = new ArrayList<>();
-
         var shoppingCart = new ShoppingCart(productsList);
         shoppingCart.addProductToCart(PRODUCT2);
-
         shoppingCart.removeProductFromCart(PRODUCT2);
 
-        assertEquals(0, productsList.size());
+        assertEquals(0, shoppingCart.getProducts().size());
     }
 
     @Test
     void removeNotAddedProductFromCart() {
-
         List<Product> productsList = new ArrayList<>();
         var shoppingCart = new ShoppingCart(productsList);
 
@@ -95,15 +96,13 @@ class ShoppingCartTest {
 
     @Test
     void removeOneFromTwoAddedProductsFromCart() {
-
         List<Product> productsList = new ArrayList<>();
         productsList.add(PRODUCT1);
         productsList.add(PRODUCT2);
-
         var shoppingCart = new ShoppingCart(productsList);
         shoppingCart.removeProductFromCart(PRODUCT1);
 
-        assertEquals(1, productsList.size());
+        assertEquals(1, shoppingCart.getProducts().size());
         assertEquals(PRODUCT2_ID, productsList.get(0).getId());
         assertEquals(PRODUCT2_NAME, productsList.get(0).getName());
         assertEquals(PRODUCT2_PRICE, productsList.get(0).getPrice());
@@ -112,24 +111,20 @@ class ShoppingCartTest {
 
     @Test
     void removeAddedWithoutParamsProductFromCart() {
-
         var product = new Product();
         List<Product> productsList = new ArrayList<>();
         productsList.add(product);
-
         var shoppingCart = new ShoppingCart(productsList);
         shoppingCart.removeProductFromCart(product);
 
-        assertEquals(0, productsList.size());
+        assertEquals(0, shoppingCart.getProducts().size());
     }
 
     @Test
     void getCartTotalPriceWithOneProductWithoutParamsInIt() {
-
         var product = new Product();
         List<Product> productsList = new ArrayList<>();
         productsList.add(product);
-
         var shoppingCart = new ShoppingCart(productsList);
 
         assertEquals(0, shoppingCart.getCartTotalPrice());
@@ -137,10 +132,8 @@ class ShoppingCartTest {
 
     @Test
     void getCartTotalPriceWithOneProductInIt() {
-
         List<Product> productsList = new ArrayList<>();
         productsList.add(PRODUCT1);
-
         var shoppingCart = new ShoppingCart(productsList);
 
         assertEquals(PRODUCT1_SUM_IN_CART, shoppingCart.getCartTotalPrice());
@@ -148,10 +141,8 @@ class ShoppingCartTest {
 
     @Test
     void getCartTotalPriceWithOneProductOfQuantityTwoInIt() {
-
         List<Product> productsList = new ArrayList<>();
         productsList.add(PRODUCT2);
-
         var shoppingCart = new ShoppingCart(productsList);
 
         assertEquals(PRODUCT2_SUM_IN_CART, shoppingCart.getCartTotalPrice());
@@ -159,11 +150,9 @@ class ShoppingCartTest {
 
     @Test
     void getCartTotalPriceWithTwoProductsInIt() {
-
         List<Product> productsList = new ArrayList<>();
         productsList.add(PRODUCT1);
         productsList.add(PRODUCT2);
-
         var shoppingCart = new ShoppingCart(productsList);
 
         assertEquals(PRODUCT1_SUM_IN_CART + PRODUCT2_SUM_IN_CART, shoppingCart.getCartTotalPrice());
@@ -171,34 +160,28 @@ class ShoppingCartTest {
 
     @Test
     void getProductByIdFromCartWithOneProduct() {
-
         List<Product> productsList = new ArrayList<>();
         productsList.add(PRODUCT1);
-
         var shoppingCart = new ShoppingCart(productsList);
 
-        assertEquals(PRODUCT1, shoppingCart.getProductById(1));
+        assertEquals(PRODUCT1, shoppingCart.getProductById(PRODUCT1_ID));
     }
 
     @Test
     void getProductByIdFromCartWithTwoProducts() {
-
         List<Product> productsList = new ArrayList<>();
         productsList.add(PRODUCT1);
         productsList.add(PRODUCT2);
-
         var shoppingCart = new ShoppingCart(productsList);
 
-        assertEquals(PRODUCT2, shoppingCart.getProductById(2));
+        assertEquals(PRODUCT2, shoppingCart.getProductById(PRODUCT2_ID));
     }
 
     @Test
     void getProductByIdFromEmptyCart() {
-
         List<Product> productsList = new ArrayList<>();
         var shoppingCart = new ShoppingCart(productsList);
 
-        assertThrows(ProductNotFoundException.class, () -> shoppingCart.getProductById(1));
+        assertThrows(ProductNotFoundException.class, () -> shoppingCart.getProductById(PRODUCT1_ID));
     }
-
 }
