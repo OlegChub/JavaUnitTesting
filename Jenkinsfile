@@ -18,6 +18,15 @@ pipeline {
                 echo "Unit testing is finished"
             }
         }
+
+        stage("API testing") {
+                    steps {
+                        echo "Starting API tests ..."
+                        sh 'mvn clean -Dtest=APITests test'
+                        echo "API testing is finished"
+                    }
+                }
+
     }
     post {
                 always {
