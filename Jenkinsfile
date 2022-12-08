@@ -22,8 +22,9 @@ pipeline {
         stage("API testing") {
                     steps {
                         echo "Starting API tests ..."
-                        sh 'mvn clean -Dtest=APITests test'
+                        sh 'mvn clean -Dtest=APITests test surefire-report:report'
                         echo "API testing is finished"
+
                     }
                 }
 
