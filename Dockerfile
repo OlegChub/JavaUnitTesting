@@ -1,3 +1,3 @@
-FROM node:16.13.1-alpine
-
-RUN apk add -U subversion
+FROM alpine:3.17.0
+RUN mkdir -p /home/app
+COPY . /home/app
