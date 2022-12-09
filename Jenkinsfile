@@ -4,12 +4,12 @@ pipeline {
         maven 'Maven'
     }
     stages {
-//         stage("Build") {
-//             steps {
-//                 echo "Building the app ..."
-//                 sh 'mvn test-compile'
-//             }
-//         }
+        stage("Build") {
+            steps {
+                echo "Building the app ..."
+                bat 'mvn test-compile'
+            }
+        }
 
         stage("Unit testing") {
             steps {
@@ -22,7 +22,7 @@ pipeline {
         stage("API testing") {
                     steps {
                         echo "Starting API tests ..."
-                        sh 'mvn clean -Dtest=APITests test surefire-report:report'
+                        bat 'mvn clean -Dtest=APITests test surefire-report:report'
                         echo "API testing is finished"
 
                     }
