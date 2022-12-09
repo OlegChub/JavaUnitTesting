@@ -11,6 +11,15 @@ pipeline {
             }
         }
 
+        stage("Docker") {
+                    agent {
+                                    docker { image 'node:16.13.1-alpine' }
+                                }
+                                steps {
+                                    bat 'node --version'
+                                }
+                }
+
         stage("Unit testing") {
             steps {
                 echo "Starting unit tests ..."
