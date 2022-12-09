@@ -4,12 +4,12 @@ pipeline {
         maven 'Maven'
     }
     stages {
-        stage("Build") {
-            steps {
-                echo "Building the app ..."
-                sh 'mvn test-compile'
-            }
-        }
+//         stage("Build") {
+//             steps {
+//                 echo "Building the app ..."
+//                 sh 'mvn test-compile'
+//             }
+//         }
 
         stage("Unit testing") {
             steps {
