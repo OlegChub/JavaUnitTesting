@@ -14,7 +14,7 @@ pipeline {
         stage("Unit testing") {
             steps {
                 echo "Starting unit tests ..."
-                sh 'mvn clean -Dtest=ShoppingCartTest test'
+                bat 'mvn clean -Dtest=ShoppingCartTest test'
                 echo "Unit testing is finished"
             }
         }
