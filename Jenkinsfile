@@ -6,7 +6,6 @@ pipeline {
     stages {
         stage("Build") {
             steps {
-                sh 'gradle --version'
                 echo "Building the app ..."
                 sh 'mvn test-compile'
             }
