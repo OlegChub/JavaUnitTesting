@@ -13,7 +13,7 @@ pipeline {
 
         stage("Docker") {
                     agent {
-                                    docker { wsl image 'node:16.13.1-alpine' }
+                                    docker { image 'node:16.13.1-alpine' -d -t -w 'c/ProgramData/Jenkins/.jenkins/workspace/HW@2/'}
                                 }
                                 steps {
                                     bat 'node --version'
