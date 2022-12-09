@@ -13,7 +13,7 @@ pipeline {
 
         stage("Docker") {
                     agent {
-                                    docker { image 'node:16.13.1-alpine' }
+                                    docker { wsl image 'node:16.13.1-alpine' }
                                 }
                                 steps {
                                     bat 'node --version'
