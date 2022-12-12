@@ -1,4 +1,4 @@
-FROM alpine as build
+FROM mcr.microsoft.com/windows
 
 ARG MAVEN_VERSION=3.6.3
 ARG USER_HOME_DIR="/root"
