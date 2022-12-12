@@ -8,7 +8,7 @@ import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasItems;
 
-public class APITests {
+public class APITests extends BaseApiTest {
     @Test
     public void test1() {
         Response response = get("https://reqres.in/api/users?page=2");
