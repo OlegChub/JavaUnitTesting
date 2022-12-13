@@ -1,20 +1,22 @@
 package api.service;
 
-import org.apache.http.HttpStatus;
+import org.aeonbits.owner.ConfigFactory;
 import org.json.simple.JSONObject;
 
 import static io.restassured.RestAssured.given;
-import static io.restassured.RestAssured.post;
 
 public class SlackService {
+    private static SlackConfig config = ConfigFactory.create(SlackConfig.class, System.getProperties());
+
     public static void postNotification(String message) {
         JSONObject request = new JSONObject();
         request.put("text", message);
+        String postUrl = String.format("https://hooks.slack.com/services/%s", config.token());
         given()
                 .header("Content-type", "application/json")
                 .body(request.toJSONString()).
                 when()
-                .post("https://hooks.slack.com/services/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")
+                .post(postUrl)
                 .then()
                 .log().all();
     }
