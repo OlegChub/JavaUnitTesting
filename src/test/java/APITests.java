@@ -1,18 +1,18 @@
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.json.simple.JSONObject;
-import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasItems;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class APITests extends BaseApiTest {
     @Test
     public void test1() {
         Response response = get("https://reqres.in/api/users?page=2");
-        Assert.assertEquals(response.getStatusCode(), 200);
+        assertEquals(response.getStatusCode(), 200);
     }
 
     @Test
@@ -43,10 +43,10 @@ public class APITests extends BaseApiTest {
                 .header("Content-type", "application/json")
                 .contentType(ContentType.JSON)
                 .accept(ContentType.JSON)
-                .body(request.toJSONString()).
-                when()
-                .post("https://reqres.in/api/users").
-                then()
+                .body(request.toJSONString())
+                .when()
+                .post("https://reqres.in/api/users")
+                .then()
                 .statusCode(201);
     }
 
@@ -57,10 +57,10 @@ public class APITests extends BaseApiTest {
         request.put("job", "logistics");
 
         given()
-                .body(request.toJSONString()).
-                when()
-                .put("https://reqres.in/api/users/2").
-                then()
+                .body(request.toJSONString())
+                .when()
+                .put("https://reqres.in/api/users/2")
+                .then()
                 .statusCode(200)
                 .log().all();
     }
@@ -71,10 +71,10 @@ public class APITests extends BaseApiTest {
         request.put("job", "logistics");
 
         given()
-                .body(request.toJSONString()).
-                when()
-                .patch("https://reqres.in/api/users/2").
-                then()
+                .body(request.toJSONString())
+                .when()
+                .patch("https://reqres.in/api/users/2")
+                .then()
                 .statusCode(200)
                 .log().all();
     }
@@ -82,8 +82,8 @@ public class APITests extends BaseApiTest {
     @Test
     public void testDELETE() {
         when()
-                .delete("https://reqres.in/api/users/2").
-                then()
+                .delete("https://reqres.in/api/users/2")
+                .then()
                 .statusCode(204)
                 .log().all();
     }

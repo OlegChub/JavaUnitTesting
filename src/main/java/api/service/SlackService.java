@@ -6,7 +6,7 @@ import org.json.simple.JSONObject;
 import static io.restassured.RestAssured.given;
 
 public class SlackService {
-    private static SlackConfig config = ConfigFactory.create(SlackConfig.class, System.getProperties());
+    private static final SlackConfig config = ConfigFactory.create(SlackConfig.class, System.getProperties());
 
     public static void postNotification(String message) {
         JSONObject request = new JSONObject();
@@ -14,8 +14,8 @@ public class SlackService {
         String postUrl = String.format("https://hooks.slack.com/services/%s", config.token());
         given()
                 .header("Content-type", "application/json")
-                .body(request.toJSONString()).
-                when()
+                .body(request.toJSONString())
+                .when()
                 .post(postUrl)
                 .then()
                 .log().all();
